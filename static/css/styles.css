@@ -1,0 +1,57 @@
+body {
+    padding: 0;
+    margin: 0;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+#wrapper {
+    width: 920px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+#message-form input[type=text] {
+    width: 200px;
+    padding: 5px;
+}
+
+#message-form textarea {
+    width: 400px;
+    height: 75px;
+    padding: 5px;
+    overflow: auto;
+}
+
+.message {
+    width: 850px;
+    float: right;
+    clear: both;
+}
+
+#wrapper .message:last-child hr {
+    display: none;
+}
+
+.comment {
+    width: 780px;
+    float: right;
+    clear: both;
+}
+
+hr {
+    width: 100%;
+    clear: both;
+}
+
+.comment-form input[type=text] {
+    width: 200px;
+    padding: 5px;
+}
+
+.comment-form textarea {
+    width: 200px;
+    padding: 5px;
+    height: 50px;
+    overflow: auto;
+}
+

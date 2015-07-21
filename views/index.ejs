@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>The Dojo Message Board</title>
+    <link rel="stylesheet" type="text/css" href="css/styles.css"/>
+</head>
+<body>
+
+<div id="wrapper">
+
+    <h1>The Dojo Message Board</h1>
+
+    <hr/>
+
+    <form id="message-form" action="/messages" method="post">
+        <p>
+            <label for="name">Name:</label><br />
+            <input type="text" name="name"/>
+        </p>
+        
+        <p>
+            <label for="message">Message:</label><br />
+            <textarea name="message"></textarea>
+        </p>
+
+        <p>
+            <input type="submit" value="Post message"/>
+        </p>
+
+    </form>
+
+    <hr/>
+
+    <%
+    // For in loop to iterate over all
+    // documents in the "messages"
+    // collection from the newest to
+    // oldest message
+    %>
+    <% for(var msg in messages) {  %>
+
+        <div class="message">
+            <h2>Name: <%= messages[msg].name; %></h2>
+            <h3>Message: &ldquo;<%= messages[msg].message; %>&rdquo;</h3>
+
+                <div class="comment">
+
+                    <%
+                    // Month names in an array
+                    var monthName = [
+                        "January",
+                        "February",
+                        "March",
+                        "April",
+                        "May",
+                        "June",
+                        "July",
+                        "August",
+                        "September",
+                        "October",
+                        "November",
+                        "December"
+                    ];
+
+                    // For loop to
+                    // iterate over all
+                    // comment(s) of an associated
+                    // message
+                    %>
+                    <% for(var j = messages[msg].comments.length -1; j > -1; j--) { %>
+                        <p><strong>Name:</strong> <%= messages[msg].comments[j].name; %><br /><strong>Comment:</strong> <%= messages[msg].comments[j].comment; %><br />
+                        <strong>Date Posted:</strong> <%= messages[msg].comments[j].created_at.getHours(); %>:<%= ("0" + messages[msg].comments[j].created_at.getMinutes()).slice(-2) %>, <%= monthName[messages[msg].comments[j].created_at.getMonth()]; %> <%= messages[msg].comments[j].created_at.getDate(); %>, <%= messages[msg].comments[j].created_at.getFullYear(); %>
+                        </p>
+
+                    <% } %>
+
+                    <form class="comment-form" action="/message/<%= messages[msg]._id %>" method="post">
+                        <p><label for="name">Name:</label><br />
+                            <input type="text" name="name"/></p>
+                        <p><label for="comment">Comment:</label><br />
+                            <textarea name="comment"></textarea></p>
+                        <p><input type="submit" value="Post comment"/></p>
+
+                    </form>
+                </div>
+
+
+            <hr />
+
+
+        </div>
+
+
+    <% } %>
+
+
+</div>
+
+</body>
+</html>
